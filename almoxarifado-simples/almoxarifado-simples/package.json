@@ -1,0 +1,14 @@
+{
+  "name": "almoxarifado-simples",
+  "version": "1.0.0",
+  "description": "Sistema simples de gestão de almoxarifado para estudo e testes com Playwright",
+  "scripts": {
+    "start": "node server.js",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0"
+  }
+}

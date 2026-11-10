@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema simples de controle de almoxarifado">
+  <title>Almoxarifado | Controle de estoque</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Página inicial">
+      <span class="brand-icon">📦</span>
+      <span><strong>Almoxarifado</strong><small>CONTROLE DE ESTOQUE</small></span>
+    </a>
+    <span class="topbar-note">Sistema de controle interno</span>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">VISÃO GERAL</p>
+        <h1>Painel do almoxarifado</h1>
+        <p class="subtitle">Acompanhe produtos, quantidades e movimentações do estoque.</p>
+      </div>
+      <button id="exportar-csv" class="button button-secondary" type="button">⇩ Exportar CSV</button>
+    </section>
+
+    <section class="stats" aria-label="Resumo do estoque">
+      <article class="stat-card">
+        <span class="stat-label">Produtos cadastrados</span>
+        <strong id="total-produtos" class="stat-value">0</strong>
+        <span class="stat-foot">Itens diferentes</span>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">Unidades em estoque</span>
+        <strong id="total-unidades" class="stat-value">0</strong>
+        <span class="stat-foot">Quantidade total</span>
+      </article>
+      <article class="stat-card stat-warning">
+        <span class="stat-label">Estoque baixo</span>
+        <strong id="total-baixo" class="stat-value">0</strong>
+        <span class="stat-foot">No limite ou abaixo do mínimo</span>
+      </article>
+    </section>
+
+    <section class="panel form-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">NOVO ITEM</p>
+          <h2>Cadastrar produto</h2>
+        </div>
+        <span class="heading-icon">＋</span>
+      </div>
+      <form id="form-produto">
+        <div class="form-grid">
+          <label class="field field-wide">
+            Nome do produto
+            <input id="nome-produto" name="nome" type="text" placeholder="Ex.: Luva de proteção" maxlength="70" required>
+          </label>
+          <label class="field">
+            Categoria
+            <select id="categoria-produto" name="categoria" required>
+              <option value="">Selecione</option>
+              <option>Equipamentos</option>
+              <option>EPIs</option>
+              <option>Materiais de escritório</option>
+              <option>Limpeza</option>
+              <option>Ferramentas</option>
+              <option>Outros</option>
+            </select>
+          </label>
+          <label class="field">
+            Quantidade inicial
+            <input id="quantidade-produto" name="quantidade" type="number" min="0" step="1" placeholder="Ex.: 25" required>
+          </label>
+          <label class="field">
+            Estoque mínimo
+            <input id="estoque-minimo" name="minimo" type="number" min="0" step="1" value="5" required>
+          </label>
+          <label class="field">
+            Localização
+            <input id="localizacao-produto" name="localizacao" type="text" placeholder="Ex.: Prateleira A1" maxlength="40">
+          </label>
+        </div>
+        <div class="form-actions">
+          <p id="mensagem-formulario" class="form-message" role="status" aria-live="polite"></p>
+          <button class="button button-primary" type="submit">Cadastrar produto</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel inventory-panel">
+      <div class="inventory-heading">
+        <div>
+          <p class="eyebrow">GERENCIAMENTO</p>
+          <h2>Produtos em estoque</h2>
+        </div>
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="buscar-produto" type="search" placeholder="Buscar produto..." aria-label="Buscar produto">
+        </label>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Categoria</th>
+              <th>Quantidade</th>
+              <th>Mínimo</th>
+              <th>Localização</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="lista-produtos">
+            <tr id="estado-vazio"><td colspan="7" class="empty-state">Nenhum produto cadastrado. Adicione o primeiro item acima.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-hint">Os dados ficam salvos neste navegador. Para uso compartilhado entre computadores, será necessário conectar um banco de dados e um servidor com autenticação.</p>
+    </section>
+
+    <footer>Almoxarifado • Projeto de estudo em HTML, CSS e JavaScript</footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
